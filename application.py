@@ -105,3 +105,16 @@ def register():
     #if user entered route via GET method, render register.html
     elif request.method == "GET":
         return render_template("registration.html") 
+
+#recall to setup the database as required
+@app.route("/booking")
+def booking():
+    terminal = request.form.get("terminal") 
+    date = request.form.get("date")
+    db.execute("INSERT INTO transactions (terminal, date) VALUES (:terminal, :date)", terminal=terminal, date=date)
+    
+@app.route("/seatselect")
+def seatselect():
+    arr = []
+    seat = request.args.get("seat") #ensure that this name was used in the booking page
+    arr.append(seat)
