@@ -69,4 +69,39 @@ def login():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("login.html")
-    
+
+
+#listening for the register route
+@app.route("/register", methods=["GET","POST"])
+def register():
+    #check if the route was entered via POST
+    if request.method == "POST":
+        #check if all fields were properly filled 
+        if not request.form.get("firstname"):
+            return apology("you omitted your firstname", 400) #note, this is yet to be implemented
+        elif not request.form.get("lastname"):
+            return apology("you omitted your lastname", 400)
+        elif not request.form.get("email"):
+            return apology("you omitted your email", 400)
+        elif not request.form.get("phone"):
+            return apology("you omitted your phone number", 400)
+        elif not request.form.get("password"):
+            return apology("you must enter a password", 400)
+        elif not request.form.get("password") == request.form.get("confirmation"): #check what was used for the input name
+            return apology("passwords do not match", 400)
+        # generate a hash for the password
+        hash = generate_password_hash(request.form.get("password"))
+        #insert the form values into the database
+        new_user = db.execute("INSERT INTO users (phone, firstname, lastname, email, hash) VALUES (:phone, :firstname, :lastname, :email, :hash)", phone=request.form.get("phone"), firstname=request.form.get("firstname"), lastname=request.form.get("lastname"), email=request.form.get("email"), hash=hash)
+        #checks if username has been taken
+        if not new_user:
+           return apology("username taken", 400) # ensure you update this in apology.html
+        else:
+            flash("Registered") #ensure that this was implemenmted in layout.html
+            #remembers the newly registered user so he can be immediately logged in
+            session["user_id"] = new_user
+            #redirects user to the landing page immediately the info is inserted properly
+            return redirect(url_for("index"))
+    #if user entered route via GET method, render register.html
+    elif request.method == "GET":
+        return render_template("registration.html") 
