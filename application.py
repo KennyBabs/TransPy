@@ -5,7 +5,7 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required
+from helpers import apology, login_required,luhn_algorithm
 
 #configure application
 app = Flask(__name__)
@@ -33,7 +33,7 @@ db = SQL("sqlite:///transpy.db")
 @app.route("/")
 @login_required #this needs to be implemented on helpers.py
 def index():
-    # return apology("you need to work on the booking page", 400)
+    #return apology("you need to work on the booking page", 400)
     return render_template("booking.html")
 
 @app.route("/login", methods=["GET","POST"])
@@ -77,13 +77,13 @@ def register():
     #check if the route was entered via POST
     if request.method == "POST":
         #check if all fields were properly filled 
-        if not request.form.get("firstname"):
+        if not request.form.get("firstName"):
             return apology("you omitted your firstname", 400) #note, this is yet to be implemented
-        elif not request.form.get("lastname"):
+        elif not request.form.get("lastName"):
             return apology("you omitted your lastname", 400)
         elif not request.form.get("email"):
             return apology("you omitted your email", 400)
-        elif not request.form.get("phone"):
+        elif not request.form.get("phoneNumber"):
             return apology("you omitted your phone number", 400)
         elif not request.form.get("password"):
             return apology("you must enter a password", 400)
@@ -92,7 +92,7 @@ def register():
         # generate a hash for the password
         hash = generate_password_hash(request.form.get("password"))
         #insert the form values into the database
-        new_user = db.execute("INSERT INTO users (phone, firstname, lastname, email, hash) VALUES (:phone, :firstname, :lastname, :email, :hash)", phone=request.form.get("phone"), firstname=request.form.get("firstname"), lastname=request.form.get("lastname"), email=request.form.get("email"), hash=hash)
+        new_user = db.execute("INSERT INTO users (phone, firstname, lastname, email, hash) VALUES (:phone, :firstname, :lastname, :email, :hash)", phone=request.form.get("phoneNumber"), firstname=request.form.get("firstName"), lastname=request.form.get("lastName"), email=request.form.get("email"), hash=hash)
         #checks if username has been taken
         if not new_user:
            return apology("username taken", 400) # ensure you update this in apology.html
@@ -106,15 +106,6 @@ def register():
     elif request.method == "GET":
         return render_template("registration.html") 
 
-#recall to setup the database as required
-@app.route("/booking")
-def booking():
-    terminal = request.form.get("terminal") 
-    date = request.form.get("date")
-    db.execute("INSERT INTO transactions (terminal, date) VALUES (:terminal, :date)", terminal=terminal, date=date)
-    
-@app.route("/seatselect")
-def seatselect():
-    arr = []
-    seat = request.args.get("seat") #ensure that this name was used in the booking page
-    arr.append(seat)
+
+
+
