@@ -30,10 +30,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link nav-desgn" href="/register">Sign up</a></li>
-                        <li class="nav-item"><a class="nav-link nav-desgn" href="/login">Sign in</a></li>
-                    </ul>
+                {% if session.user_id %}
+                <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="#">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">upcoming</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">History</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="#">Log Out</a></li>
+                </ul>
+            {% else %}
+            <ul class="navbar-nav ml-auto mt-2">
+                <li class="nav-item"><a class="nav-link nav-desgn" href="/register">Sign up</a></li>
+                <li class="nav-item"><a class="nav-link nav-desgn" href="/login">Sign in</a></li>
+            </ul>
+            {% endif %}
             </div>
         </nav>
 

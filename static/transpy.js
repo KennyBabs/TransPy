@@ -1,5 +1,5 @@
 $(function(){
-    $('form').submit(function(e){
+    $('form{name=myform]').submit(function(e){
         e.preventDefault();
         let formData = {
             'depature' : $('#dept-state option:selected').text(),
