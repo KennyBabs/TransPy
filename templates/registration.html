@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block main %}
+    <!-- <div class="container-fluid bg"> -->
+        <div class="row justify-content-end bg">
+            <div class="bg-overlay"></div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <form action="/registration" method="post" class="form-container mt-3">
+                    <h2 class="text-center">Register</h2>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" id="phoneNumber" placeholder="Phone Number">
+                        </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmation">Confirm Password</label>
+                        <input type="password" class="form-control" name="confirmation" id="confirmation" placeholder="Confirm Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div>
+    <!-- </div> -->
+                       
+{% endblock %}
