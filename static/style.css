@@ -40,6 +40,86 @@ nav .navbar-brand .green
     padding: 3px;
 }
 
+
+
+.foot-er{
+    border-top: solid;
+}
+.my-form{
+    border: 1px solid red;
+    border-radius: 15px 50px;
+    padding: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.book-dpt{
+    margin-bottom: 30px;
+}
+
+.book-btn{
+    margin-top: 20px;
+}
+
+.section-con{
+    display: flex;
+    justify-content: flex-start;
+}
+.seat-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.seat-head{
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
+
+.seat {
+    background: #4CAF50;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.seat-select {
+    display: none;
+    border: 2px solid yellow;
+}
+
+.seat-select:checked+.seat {
+    background: #F44336;
+}
+
+.cc-digits{
+    margin-top: 50px;
+}
+
+.credit-card input {
+    color: white;
+    background: grey;
+    margin-right: 0.5em;
+    width: 100%;
+    font-size: 1em;
+    line-height: 1em;
+}
+
+.credit-card {
+    border: 1px solid red;
+
+}
+
+.pay-btn{
+    float: right;
+    margin-top: 5px;
+}
+
+.amountFee
+{
+    text-align:center;
+    margin-top: 30px;
+   display: none; 
+
 main img
 {
     /* constrain images on small screens */
@@ -78,4 +158,5 @@ main img
 .mg
 {
     margin-top: 150px;
+
 }
