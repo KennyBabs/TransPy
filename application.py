@@ -106,6 +106,41 @@ def register():
     elif request.method == "GET":
         return render_template("registration.html") 
 
+#recall to setup the database as required
+#use this if the booking page will be different from the seat-selection page
+all_arr = []
+
+
+@app.route("/booking", methods=["GET","POST"])
+def booking():
+    if request.method == "POST":
+        terminal = request.form.get("terminal") 
+        date = request.form.get("date")
+        credit_card = request.form.get("creditCard") #verify the name that was used
+        amount = request.form.get("price")
+        seat = request.form.get("seat")
+        if not terminal:
+            return apology("you did not enter your destination", 400)
+        elif not date:
+            return apology("you did not enter a date", 400)
+        elif not credit_card:
+            return apology("you must enter your credit card details", 400)
+        validate_card = luhn_algorithm(credit_card)
+        if validate_card == True:
+            trans = db.execute("INSERT INTO transactions (id, terminal, date, seat, amount) VALUES (:id, :terminal, :date, :seat, :amount)", id=session["user_id"], terminal=terminal, date=date, seat=seat, amount=8500)
+            if not trans:
+                return apology("you omitted at least one field", 400)
+            else:
+                flash("you have successfully booked a seat. check your email for details")
+                all_arr.append(seat)
+                return redirect(url_for("index"))
+        else:
+            flash("invalid card details")
+            return redirect(url_for("index"))
+    else:
+        return redirect(url_for("index"))
+
+
 
 
 
