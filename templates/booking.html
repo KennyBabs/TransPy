@@ -5,40 +5,45 @@
 {% endblock %}
 
 {% block main %}
+<form action="/booking" method="POST">
     <div class="container my-form">
         <div class="form-group row">
             <div class="col-6 book-dpt">
                 <label for="dept-state">Depature State:</label>
                 <select class="form-control" id="dept-state">
-                    <option selected>Lagos</option>
+                    <option value="lagos" selected>Lagos</option>
                 </select>
             </div>
             <div class="col-6 book-dpt">
                 <label for="">Destination State:</label>
                 <select class="form-control" id="dest-state">
-                    <option>FCT Abuja</option>
-                    <option>Oyo-Ibadan</option>
-                    <option>Enugu-Enugu</option>
-                    <option>Bayelsa-Yenagoa</option>
-                    <option>Rivers-Port Harcourt</option>
+                    <option   selected disabled>choose a destination</option>
+                    <option value="abuja">FCT Abuja</option>
+                    <option value="oyo">Oyo-Ibadan</option>
+                    <option value="enugu">Enugu-Enugu</option>
+                    <option value="bayelsa">Bayelsa-Yenagoa</option>
+                    <option value="rivers">Rivers-Port Harcourt</option>
                 </select>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <label for="">Depature Date:</label>
-                <input type="date" class="form-control">
+                <input type="date" class="form-control" id="date-input">
             </div>
             <div class="col-3">
                 <label for="">Number:</label>
-                <select class="form-control" id="dept-state">
+                <select class="form-control" id="number">
                     <option selected>1</option>
                 </select>
             </div>
+            <div class="col-3 amountFee" id="amount">
+                <p id='amount'></p>
+            </div>
             <div class="col-3">
-                <button class="btn btn-primary btn-lg book-btn" data-toggle="modal" data-target=".bd-example-modal-lg">Book Now</button>
+                <a class="btn btn-primary btn-lg book-btn" data-toggle="modal" href=".bd-example-modal-lg">Book Now</a>
             </div>
             </div>
-    </div>    
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+      
+    <div class="modal fade bd-example-modal-lg" id="modalExample" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
             aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -49,72 +54,56 @@
                     </button>
                 </div>
                 <div class="modal-body section-con">
-                    <section class="seat-container col-4">
-                            <div>
-                                <input id="seat-1" class="seat-select" type="radio" value="1" name="seat[]" />
-                                <label for="seat-1" class="seat">1</label>
-                            </div>
-                            <div>
-                                <input id="seat-2" class="seat-select" type="radio" value="2" name="seat[]" />
-                                <label for="seat-2" class="seat">2</label>
-                            </div>
-                            <div>
-                                <input id="seat-3" class="seat-select" type="radio" value="3" name="seat[]" />
-                                <label for="seat-3" class="seat">3</label>
-                            </div>
-                            <div>
-                                <input id="seat-4" class="seat-select" type="radio" value="4" name="seat[]" />
-                                <label for="seat-4" class="seat">4</label>
-                            </div>
-                            <div>
-                                <input id="seat-5" class="seat-select" type="radio" value="5" name="seat[]" />
-                                <label for="seat-5" class="seat">5</label>
-                            </div>
-                            <div>
-                                <input id="seat-6" class="seat-select" type="radio" value="6" name="seat[]" />
-                                <label for="seat-6" class="seat">6</label>
-                            </div>
-                            <div>
-                                <input id="seat-7" class="seat-select" type="radio" value="7" name="seat[]" />
-                                <label for="seat-7" class="seat">7</label>
-                            </div>
-                            <div>
-                                <input id="seat-8" class="seat-select" type="radio" value="8" name="seat[]" />
-                                <label for="seat-8" class="seat">8</label>
-                            </div>
-                            <div>
-                                <input id="seat-9" class="seat-select" type="radio" value="9" name="seat[]" />
-                                <label for="seat-9" class="seat">9</label>
-                            </div>
-                            <div>
-                                <input id="seat-10" class="seat-select" type="radio" value="10" name="seat[]" />
-                                <label for="seat-10" class="seat">10</label>
-                            </div>
-                            <div>
-                                <input id="seat-11" class="seat-select" type="radio" value="11" name="seat[]" />
-                                <label for="seat-11" class="seat">11</label>
-                            </div>
-                            <div>
-                                <input id="seat-12" class="seat-select" type="radio" value="12" name="seat[]" />
-                                <label for="seat-12" class="seat">12</label>
-                            </div>
-                            <div>
-                                <input id="seat-13" class="seat-select" type="radio" value="13" name="seat[]" />
-                                <label for="seat-13" class="seat">13</label>
-                            </div>
-                            <div>
-                                <input id="seat-14" class="seat-select" type="radio" value="14" name="seat[]" />
-                                <label for="seat-14" class="seat">14</label>
-                            </div>
+                    <div class="seat-container col-4">
+                            <input id="seat-1" class="seat-select" type="radio" value="1" name="seat" checked="checked"/>
+                            <label for="seat-1" class="seat">1</label>
+                        
+                            <input id="seat-2" class="seat-select" type="radio" value="2" name="seat" />
+                            <label for="seat-2" class="seat">2</label>
+                        
+                            <input id="seat-3" class="seat-select" type="radio" value="3" name="seat" />
+                            <label for="seat-3" class="seat">3</label>
+
+                            <input id="seat-4" class="seat-select" type="radio" value="5" name="seat" />
+                            <label for="seat-4" class="seat">4</label>
+                        
+                            <input id="seat-5" class="seat-select" type="radio" value="5" name="seat" />
+                            <label for="seat-5" class="seat">5</label>
+                        
+                            <input id="seat-6" class="seat-select" type="radio" value="6" name="seat" />
+                            <label for="seat-6" class="seat">6</label>
+                            
+                            <input id="seat-7" class="seat-select" type="radio" value="7" name="seat" />
+                            <label for="seat-7" class="seat">7</label>
+                            
+                            <input id="seat-8" class="seat-select" type="radio" value="8" name="seat" />
+                            <label for="seat-8" class="seat">8</label>
+                            
+                            <input id="seat-9" class="seat-select" type="radio" value="9" name="seat" />
+                            <label for="seat-9" class="seat">9</label>
+                        
+                            <input id="seat-10" class="seat-select" type="radio" value="10" name="seat" />
+                            <label for="seat-10" class="seat">10</label>
                     
-                    </section>
-                    <section class="cc-digits col-6">
+                            <input id="seat-11" class="seat-select" type="radio" value="11" name="seat" />
+                            <label for="seat-11" class="seat">11</label>
+            
+                            <input id="seat-12" class="seat-select" type="radio" value="12" name="seat" />
+                            <label for="seat-12" class="seat">12</label>
+                            
+                            <input id="seat-13" class="seat-select" type="radio" value="13" name="seat" />
+                            <label for="seat-13" class="seat">13</label>
+                            
+                            <input id="seat-14" class="seat-select" type="radio" value="14" name="seat" />
+                            <label for="seat-14" class="seat">14</label>
+                    </div>
+                    <div class="cc-digits col-6" id="digits">
                         <div class="md-form md-bg form-lg">
                             <strong><label for="form-bg-lg"></label>Enter Credit Card Here:</strong>
-                            <input id="form-bg-lg" class="form-control form-control-lg" type="text" placeholder="e.g 54xxxxxxxxxxxx">
+                            <input id="form-bg-lg " class="form-control form-control-lg" type="text" placeholder="e.g 54xxxxxxxxxxxx" name="creditCard">
                         </div>
-                        <button type="button" class="btn btn-primary btn-lg pay-btn">Make Payment</button>
-                    </section>
+                        <button type="submit" class="btn btn-primary btn-lg pay-btn">Make Payment</button>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
@@ -122,5 +111,6 @@
             </div>
         </div>
     </div>
-
+</div> 
+</form>
 {% endblock %}
