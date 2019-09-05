@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-<form action="/booking" method="POST">
+<form action="/booking" method="POST" name="myform">
     <div class="container my-form">
         <div class="form-group row">
             <div class="col-6 book-dpt">
@@ -15,8 +15,8 @@
                 </select>
             </div>
             <div class="col-6 book-dpt">
-                <label for="">Destination State:</label>
-                <select class="form-control" id="dest-state">
+                <label for="dest-state">Destination State:</label>
+                <select class="form-control" id="dest-state" name="terminal">
                     <option   selected disabled>choose a destination</option>
                     <option value="abuja">FCT Abuja</option>
                     <option value="oyo">Oyo-Ibadan</option>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-3">
                 <label for="">Depature Date:</label>
-                <input type="date" class="form-control" id="date-input">
+                <input type="date" class="form-control" id="date-input" name="date">
             </div>
             <div class="col-3">
                 <label for="">Number:</label>
@@ -55,8 +55,8 @@
                 </div>
                 <div class="modal-body section-con">
                     <div class="seat-container col-4">
-                            <input id="seat-1" class="seat-select" type="radio" value="1" name="seat" checked="checked"/>
-                            <label for="seat-1" class="seat">1</label>
+                            <input id="seat-1" class="seat-select" type="radio" value="1" name="seat" checked disabled/>
+                            <label for="seat-1" class="default-seat">1</label>
                         
                             <input id="seat-2" class="seat-select" type="radio" value="2" name="seat" />
                             <label for="seat-2" class="seat">2</label>
