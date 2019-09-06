@@ -4,8 +4,9 @@ $(document).ready(function(){
 
         let arrival = $('#dest-state option:selected').text()
 
-        $.get("/checkPrice?="+arrival, function(data){
+        $.get("/checkprice?="+arrival, function(data){
             $('#amount p').html(data);
+            $('#amount p').show();
         })
     })
 
@@ -18,8 +19,6 @@ $(document).ready(function(){
             number = $('#number option:selected').val(),
             seat = $('input[name=seat]:checked').val(),
             creditCard = $('input[name=creditCard]').val()
-
-        console.log(depature,destination,number, seat, creditCard, depature_date)
 
         $.ajax({
             url : "/seatselect",
