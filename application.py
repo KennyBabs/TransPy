@@ -5,7 +5,7 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required,luhn_algorithm
+from helpers import apology, login_required,luhn_algorithm, naira
 
 #configure application
 app = Flask(__name__)
@@ -34,7 +34,8 @@ db = SQL("sqlite:///transpy.db")
 @login_required #this needs to be implemented on helpers.py
 def index():
     #return apology("you need to work on the booking page", 400)
-    return render_template("booking.html")
+    arrivals = db.execute("SELECT arrival FROM terminals WHERE depature=:Lagos",Lagos="Lagos")
+    return render_template("booking.html", arrivals=arrivals)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -157,6 +158,13 @@ def seatselect():
     info = request.get_json()
 
     print(info)
+
+@app.route("/checkprice", methods=["GET"])
+def checkprice():
+    arrival = request.args.get("arrival")
+    rows = db.execute("SELECT price FROM terminals WHERE arrival=:arrival", arrival=arrival)
+    price = naira(rows[0]["price"])
+    return jsonify(price)
 
 
 def errorhandler(e):
