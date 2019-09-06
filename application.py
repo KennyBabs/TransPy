@@ -71,6 +71,16 @@ def login():
         return render_template("login.html")
 
 
+@app.route("/logout")
+def logout():
+
+    # clear user_id session
+    session.clear()
+
+    # redirect to the login page
+    return redirect("/login")
+
+
 #listening for the register route
 @app.route("/register", methods=["GET","POST"])
 def register():
@@ -141,11 +151,17 @@ def booking():
         return redirect(url_for("index"))
 
 
+@app.route('/seatselect', methods=["POST"])
+def seatselect():
 
+    info = request.get_json()
+
+    print(info)
 
 
 def errorhandler(e):
     """Handle error"""
+    
     if not isinstance(e, HTTPException):
         e = InternalServerError()
     return apology(e.name, e.code)
