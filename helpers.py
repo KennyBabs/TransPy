@@ -72,3 +72,7 @@ def luhn_algorithm(cardNum):
         return True
     else:
         return False
+
+#format the transportation price to be in naira 
+def naira(amount):
+    return f"₦{amount:,.2f}"

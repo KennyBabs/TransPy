@@ -1,16 +1,24 @@
 $(document).ready(function(){
 
+    $('#dest-state').change(function(){
+
+        let arrival = $('#dest-state option:selected').text()
+
+        $.get("/checkprice?="+arrival, function(data){
+            $('#amount p').html(data);
+            $('#amount p').show();
+        })
+    })
+
     $('form[name=myform]').submit(function(e){
         e.preventDefault();
 
         let depature = $('#dept-state option:selected').text(),
-            destination = $('#dest-state option:selected').val(),
+            destination = $('#dest-state option:selected').text(),
             depature_date = $('#date-input').val(),
-                number = $('#number option:selected').val(),
-                seat = $('input[name=seat]:checked').val(),
-                creditCard = $('input[name=creditCard]').val()
-
-        console.log(depature,destination,number, seat, creditCard, depature_date)
+            number = $('#number option:selected').val(),
+            seat = $('input[name=seat]:checked').val(),
+            creditCard = $('input[name=creditCard]').val()
 
         $.ajax({
             url : "/seatselect",
