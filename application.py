@@ -1,3 +1,4 @@
+import os
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request,url_for,session
 from flask_session import Session
@@ -37,7 +38,7 @@ def index():
     seats = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     # transactions = db.execute("SELECT * FROM transactions")
     # print(transactions)
-    arrivals = db.execute("SELECT arrival FROM terminals WHERE depature=:Lagos",Lagos="Lagos")
+    arrivals = db.execute("SELECT arrival FROM terminals WHERE departure=:Lagos",Lagos="Lagos")
     return render_template("booking.html", arrivals=arrivals, seats=seats)
 
 @app.route("/login", methods=["GET","POST"])
