@@ -1,4 +1,5 @@
 import os
+import smtplib
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request,url_for,session
 from flask_session import Session
