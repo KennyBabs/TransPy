@@ -34,8 +34,11 @@ db = SQL("sqlite:///transpy.db")
 @login_required #this needs to be implemented on helpers.py
 def index():
     #return apology("you need to work on the booking page", 400)
+    seats = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    # transactions = db.execute("SELECT * FROM transactions")
+    # print(transactions)
     arrivals = db.execute("SELECT arrival FROM terminals WHERE depature=:Lagos",Lagos="Lagos")
-    return render_template("booking.html", arrivals=arrivals)
+    return render_template("booking.html", arrivals=arrivals, seats=seats)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -152,12 +155,33 @@ def booking():
         return redirect(url_for("index"))
 
 
-@app.route('/seatselect', methods=["POST"])
-def seatselect():
+# @app.route('/seatselect', methods=["GET"])
+# def seatselect():
+#     depature = request.args.get("depature")
+#     destination = request.args.get("destination")
+#     depature_date = request.args.get("depature_date")
+#     number = request.args.get("number")
+#     seat = request.args.get("seat")
+#     creditCard = request.args.get("creditCard")
 
-    info = request.get_json()
+#     print(creditCard)
 
-    print(info)
+
+#     if not depature:
+#         return apology("input required")
+#     if not destination:
+#         return apology('Input field required')
+#     if not depature_date:
+#         return apology('input required')
+#     if not number:
+#         return apology('input required')
+#     if not seat:
+#         return apology('input required')
+#     if not creditCard:
+#         return apology('input required')
+#     validate_card = luhn_algorithm(creditCard)
+#     if validate_card == True:
+#         return jsonify(True)
 
 @app.route("/checkprice", methods=["GET"])
 def checkprice():
