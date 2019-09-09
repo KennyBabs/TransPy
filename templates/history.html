@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+    <table class="table table-striped container">
+        <thead>
+            <tr>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Seat Number</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tfoot>
+
+        </tfoot>
+        <tbody>
+            {% for detail in history %}
+            <tr>
+                <td>Lagos</td>
+                <td>{{detail.terminal}}</td>
+                <td>{{detail.seat}}</td>
+                <td>{{detail.date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

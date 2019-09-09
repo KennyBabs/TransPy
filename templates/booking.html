@@ -19,7 +19,7 @@
                 <select class="form-control" id="dest-state" name="terminal">
                     <option   selected disabled>choose a destination</option>
                     {% for arrival in arrivals %}
-                    <option value='{{ arrival }}'>{{ arrival }}</option>
+                    <option value='{{ arrival.arrival }}'>{{ arrival.arrival }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -34,7 +34,7 @@
                 </select>
             </div>
             <div class="col-3 amountFee" id="amount">
-                <p id=''></p>
+                <p id='trial'></p>
             </div>
             <div class="col-3">
                 <a class="btn btn-primary btn-lg book-btn" data-toggle="modal" href=".bd-example-modal-lg">Book Now</a>
@@ -53,47 +53,12 @@
                 </div>
                 <div class="modal-body section-con">
                     <div class="seat-container col-4">
-                            <input id="seat-1" class="seat-select" type="radio" value="1" name="seat" checked disabled/>
-                            <label for="seat-1" class="default-seat">1</label>
-                        
-                            <input id="seat-2" class="seat-select" type="radio" value="2" name="seat" />
-                            <label for="seat-2" class="seat">2</label>
-                        
-                            <input id="seat-3" class="seat-select" type="radio" value="3" name="seat" />
-                            <label for="seat-3" class="seat">3</label>
-
-                            <input id="seat-4" class="seat-select" type="radio" value="5" name="seat" />
-                            <label for="seat-4" class="seat">4</label>
-                        
-                            <input id="seat-5" class="seat-select" type="radio" value="5" name="seat" />
-                            <label for="seat-5" class="seat">5</label>
-                        
-                            <input id="seat-6" class="seat-select" type="radio" value="6" name="seat" />
-                            <label for="seat-6" class="seat">6</label>
-                            
-                            <input id="seat-7" class="seat-select" type="radio" value="7" name="seat" />
-                            <label for="seat-7" class="seat">7</label>
-                            
-                            <input id="seat-8" class="seat-select" type="radio" value="8" name="seat" />
-                            <label for="seat-8" class="seat">8</label>
-                            
-                            <input id="seat-9" class="seat-select" type="radio" value="9" name="seat" />
-                            <label for="seat-9" class="seat">9</label>
-                        
-                            <input id="seat-10" class="seat-select" type="radio" value="10" name="seat" />
-                            <label for="seat-10" class="seat">10</label>
-                    
-                            <input id="seat-11" class="seat-select" type="radio" value="11" name="seat" />
-                            <label for="seat-11" class="seat">11</label>
-            
-                            <input id="seat-12" class="seat-select" type="radio" value="12" name="seat" />
-                            <label for="seat-12" class="seat">12</label>
-                            
-                            <input id="seat-13" class="seat-select" type="radio" value="13" name="seat" />
-                            <label for="seat-13" class="seat">13</label>
-                            
-                            <input id="seat-14" class="seat-select" type="radio" value="14" name="seat" />
-                            <label for="seat-14" class="seat">14</label>
+                        <input id="seatNum" class="seat-select" type="radio" value="1" name="seat" checked disabled/>
+                        <label for="seatNum" class="default-seat">1</label>
+                        {% for seat in seats %}
+                            <input id="seat-{{seat}}" class="seat-select" type="radio" value="{{seat}}" name="seat" />
+                            <label for="seat-{{seat}}" class="seat">{{seat}}</label>
+                        {% endfor %}       
                     </div>
                     <div class="cc-digits col-6" id="digits">
                         <div class="md-form md-bg form-lg">
