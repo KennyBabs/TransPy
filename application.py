@@ -133,7 +133,8 @@ def booking():
         terminal = request.form.get("terminal") 
         date = request.form.get("date")
         credit_card = request.form.get("creditCard") #verify the name that was used
-        amount = request.form.get("price")
+        rows = db.execute("SELECT price FROM terminals WHERE arrival=:terminal", terminal=terminal)
+        amount = rows[0]["price"]
         seat = request.form.get("seat")
         if not terminal:
             return apology("you did not enter your destination", 400)
@@ -143,11 +144,27 @@ def booking():
             return apology("you must enter your credit card details", 400)
         validate_card = luhn_algorithm(credit_card)
         if validate_card == True:
-            trans = db.execute("INSERT INTO transactions (id, terminal, date, seat, amount) VALUES (:id, :terminal, :date, :seat, :amount)", id=session["user_id"], terminal=terminal, date=date, seat=seat, amount=8500)
+            trans = db.execute("INSERT INTO transactions (id, terminal, date, seat, amount) VALUES (:id, :terminal, :date, :seat, :amount)", id=session["user_id"], terminal=terminal, date=date, seat=seat, amount=amount)
             if not trans:
                 return apology("you omitted at least one field", 400)
             else:
                 flash("you have successfully booked a seat. check your email for details")
+                #initialize SMTP(simple mail transfer protocol) 
+                server = smtplib.SMTP(host="smtp.gmail.com", port=587)
+                server.ehlo()
+                #secure the email route between you and the host
+                server.starttls()
+                server.ehlo()
+                #use os to get the email password that you have exported in the terminal as "VARENV"
+                password = os.environ.get("VARENV")
+                #login to your email through SMTP
+                server.login("transpycompanies@gmail.com",password)
+                #query the database for users details
+                rows = db.execute("SELECT email,lastname,firstname FROM users WHERE id=:user_id", user_id=session["user_id"])
+                #type the message you want to send to the user
+                message = "Thank you "+rows[0]["firstname"]+ " for using our transportation company\nplease find your travel details below\nName: "+rows[0]["lastname"]+" "+rows[0]["firstname"]+"\n"+"seat No: "+str(seat)+"\nPrice: "+str(amount)+"\nDestination: "+terminal
+                #send the mail by putting the sender's email, the receiver's email and your desired message
+                server.sendmail("transpycompanies@gmail.com",rows[0]["email"],message )
                 all_arr.append(seat)
                 return redirect(url_for("index"))
         else:
