@@ -174,33 +174,12 @@ def booking():
         return redirect(url_for("index"))
 
 
-# @app.route('/seatselect', methods=["GET"])
-# def seatselect():
-#     depature = request.args.get("depature")
-#     destination = request.args.get("destination")
-#     depature_date = request.args.get("depature_date")
-#     number = request.args.get("number")
-#     seat = request.args.get("seat")
-#     creditCard = request.args.get("creditCard")
+@app.route("/history")
+@login_required 
+def history():
+    history = db.execute('SELECT * FROM transactions WHERE id=:id', id=session["user_id"])
+    return render_template("history.html", history=history, naira=naira)
 
-#     print(creditCard)
-
-
-#     if not depature:
-#         return apology("input required")
-#     if not destination:
-#         return apology('Input field required')
-#     if not depature_date:
-#         return apology('input required')
-#     if not number:
-#         return apology('input required')
-#     if not seat:
-#         return apology('input required')
-#     if not creditCard:
-#         return apology('input required')
-#     validate_card = luhn_algorithm(creditCard)
-#     if validate_card == True:
-#         return jsonify(True)
 
 @app.route("/checkprice", methods=["GET"])
 def checkprice():
