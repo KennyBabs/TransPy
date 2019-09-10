@@ -57,8 +57,13 @@
                         <input id="seatNum" class="seat-select" type="radio" value="1" name="seat" checked disabled/>
                         <label for="seatNum" class="default-seat">1</label>
                         {% for seat in seats %}
-                            <input id="seat-{{seat}}" class="seat-select" type="radio" value="{{seat}}" name="seat" required>
-                            <label for="seat-{{seat}}" class="seat">{{seat}}</label>
+                            {% if seat in seater%}
+                                <input id="seat-{{seat}}" class="seat-select" type="radio" value="{{seat}}" name="seat" checked disabled>
+                                <label for="seat-{{seat}}" class="default-seat">{{seat}}</label>
+                            {% else %}
+                                <input id="seat-{{seat}}" class="seat-select" type="radio" value="{{seat}}" name="seat" required>
+                                <label for="seat-{{seat}}" class="seat">{{seat}}</label>
+                            {% endif %}
                         {% endfor %}       
                     </div>
                     <div class="cc-digits col-6" id="digits">

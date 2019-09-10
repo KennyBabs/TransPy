@@ -35,12 +35,12 @@ db = SQL("sqlite:///transpy.db")
 @app.route("/")
 @login_required #this needs to be implemented on helpers.py
 def index():
-    #return apology("you need to work on the booking page", 400)
+    
     seats = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    # transactions = db.execute("SELECT * FROM transactions")
-    # print(transactions)
+    transactions = db.execute("SELECT seat FROM transactions")
+    seater = [int(y['seat']) for y in transactions]
     arrivals = db.execute("SELECT arrival FROM terminals WHERE departure=:Lagos",Lagos="Lagos")
-    return render_template("booking.html", arrivals=arrivals, seats=seats)
+    return render_template("booking.html", arrivals=arrivals, seats=seats, seater=seater)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
