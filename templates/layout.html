@@ -1,204 +1,62 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
-
-    <head>
-
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
-        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-        crossorigin="anonymous">
-        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
-        <!-- <link href="/static/favicon.ico" rel="icon"> -->
-
-        <link href="/static/style.css" rel="stylesheet">
-
-        <title>TransPy: {% block title %}{% endblock %}</title>
-
-    </head>
-
-    <body>
-
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
-            <a class="navbar-brand" href="/"><span class="blue nav-hd">Trans</span><span class="red">Py</span></a>
-            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                {% if session.user_id %}
-                <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="#">About us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/booking">Booking</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">upcoming</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
-                </ul>
-                <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                </ul>
-            {% else %}
-            <ul class="navbar-nav ml-auto mt-2">
-                <li class="nav-item"><a class="nav-link nav-desgn" href="/register">Sign up</a></li>
-                <li class="nav-item"><a class="nav-link nav-desgn" href="/login">Sign in</a></li>
-            </ul>
-            {% endif %}
-            </div>
-        </nav>
-
-        {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary border text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Transpy</title>
+  </head>
+  <body>
+    <section id="header">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                    <a href="/" class="navbar-brand">TRANSPY</a>
+                    <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" 
+                    aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav ml-auto">
+                            {% if session.user_id %}
+                            <li class="navbar-item active">
+                                <a href="/history" class="nav-link">HISTORY</a>
+                            </li>
+                            <li class="navbar-item active">
+                                <a href="/logout" class="nav-link">LOG OUT</a>
+                            </li>
+                            {% else %}
+                            <li class="navbar-item active">
+                                <a href="/login" class="nav-link">SIGN IN</a>
+                            </li>
+                            <li class="navbar-item active">
+                                <a href="/register" class="nav-link">SIGN UP</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            </header>
-        {% endif %}
+            </nav>
+        </div>
+    </section>
 
-        <main class="container-fluid p-5">
-            {% block main %}{% endblock %}
-        </main>
-        
-        
-        <!-- Footer -->
-<footer class="page-footer font-small mdb-color pt-4 foot-er">
+    <section class="main">
+        <div class="container">
+            <div class="row bg-overlay">
+                    {% block main %}{% endblock %}
+            </div>       
+        </div>
+    </section>
 
-    <!-- Footer Links -->
-    <div class="container text-center text-md-left">
-  
-      <!-- Footer links -->
-      <div class="row text-center text-md-left mt-3 pb-3">
-  
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">TransPy</h6>
-          <p>This is a transportation web app that gives you a seamless booking experience</p>
-        </div>
-        <!-- Grid column -->
-  
-        <hr class="w-100 clearfix d-md-none">
-  
-        <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Services</h6>
-          <p>
-            <a href="#!">Haulage</a>
-          </p>
-          <p>
-            <a href="#!">Courier Services</a>
-          </p>
-          <p>
-            <a href="#!">Cargo Express</a>
-          </p>
-          <p>
-            <a href="#!">City Transit Inn</a>
-          </p>
-        </div>
-        <!-- Grid column -->
-  
-        <hr class="w-100 clearfix d-md-none">
-  
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Quick links</h6>
-          <p>
-            <a href="#!">Home</a>
-          </p>
-          <p>
-            <a href="#!">About Us</a>
-          </p>
-          <p>
-            <a href="#!">Booking Rates</a>
-          </p>
-          <p>
-            <a href="#!">Terminals</a>
-          </p>
-        </div>
-  
-        <!-- Grid column -->
-        <hr class="w-100 clearfix d-md-none">
-  
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-          <p>
-            <i class="fa fa-home mr-3"></i> Ojota, Lagos, Nigeria</p>
-          <p>
-            <i class="fa fa-envelope mr-3"></i> transpy@gmail.com</p>
-          <p>
-            <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
-          <p>
-            <i class="fa fa-print mr-3"></i> + 234 803 434 567</p>
-        </div>
-        <!-- Grid column -->
-  
-      </div>
-      <!-- Footer links -->
-  
-      <hr>
-  
-      <!-- Grid row -->
-      <div class="row d-flex align-items-center">
-  
-        <!-- Grid column -->
-        <div class="col-md-7 col-lg-8">
-  
-          <!--Copyright-->
-          <p class="text-center text-md-left">© 2018 Copyright:
-            <a href="#">
-              <strong> TransPy.com</strong>
-            </a>
-          </p>
-  
-        </div>
-        <!-- Grid column -->
-  
-        <!-- Grid column -->
-        <div class="col-md-5 col-lg-4 ml-lg-0">
-  
-          <!-- Social buttons -->
-          <div class="text-center text-md-right">
-            <ul class="list-unstyled list-inline">
-              <li class="list-inline-item">
-                <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                  <i class="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                  <i class="fab fa-google-plus-g"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-  
-        </div>
-        <!-- Grid column -->
-  
-      </div>
-      <!-- Grid row -->
-  
-    </div>
-    <!-- Footer Links -->
-  
-  </footer>
-  <!-- Footer -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="/static/transpy.js"></script>
-    </body>
-
+  </body>
 </html>
