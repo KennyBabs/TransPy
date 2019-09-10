@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block main %}
-<form action="/booking" method="POST" name="myform">
+<form action="/booking" method="POST" name="myform" class="book-form">
     <div class="container my-form">
-        <div class="form-group row">
+        <div class="form-group row form-label">
             <div class="col-6 book-dpt">
                 <label for="dept-state">Depature State:</label>
                 <select class="form-control" id="dept-state">
@@ -16,7 +16,7 @@
             </div>
             <div class="col-6 book-dpt">
                 <label for="dest-state">Destination State:</label>
-                <select class="form-control" id="dest-state" name="terminal">
+                <select class="form-control" id="dest-state" name="terminal" required>
                     <option   selected disabled>choose a destination</option>
                     {% for arrival in arrivals %}
                     <option value='{{ arrival.arrival }}'>{{ arrival.arrival }}</option>
@@ -24,8 +24,8 @@
                 </select>
             </div>
             <div class="col-3">
-                <label for="">Depature Date:</label>
-                <input type="date" class="form-control" id="date-input" name="date">
+                <label for="date-input">Depature Date:</label>
+                <input type="date" class="form-control" id="date-input" name="date" value="2019-09-10" min="2019-09-10" max="2019-09-11" required>
             </div>
             <div class="col-3">
                 <label for="">Number:</label>
@@ -34,6 +34,7 @@
                 </select>
             </div>
             <div class="col-3 amountFee" id="amount">
+                <h5>Fee:</h5>
                 <p id='trial'></p>
             </div>
             <div class="col-3">
@@ -46,7 +47,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title w-100" id="myModalLabel">Select Seat</h4>
+                    <h4 class="modal-title w-100 trans-label" id="myModalLabel"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -56,14 +57,14 @@
                         <input id="seatNum" class="seat-select" type="radio" value="1" name="seat" checked disabled/>
                         <label for="seatNum" class="default-seat">1</label>
                         {% for seat in seats %}
-                            <input id="seat-{{seat}}" class="seat-select" type="radio" value="{{seat}}" name="seat" />
+                            <input id="seat-{{seat}}" class="seat-select" type="radio" value="{{seat}}" name="seat" required>
                             <label for="seat-{{seat}}" class="seat">{{seat}}</label>
                         {% endfor %}       
                     </div>
                     <div class="cc-digits col-6" id="digits">
                         <div class="md-form md-bg form-lg">
                             <strong><label for="form-bg-lg"></label>Enter Credit Card Here:</strong>
-                            <input id="form-bg-lg " class="form-control form-control-lg" type="text" placeholder="e.g 54xxxxxxxxxxxx" name="creditCard">
+                            <input id="form-bg-lg " class="form-control form-control-lg" type="text" placeholder="e.g 54xxxxxxxxxxxx" name="creditCard" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg pay-btn">Make Payment</button>
                     </div>
