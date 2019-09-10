@@ -1,55 +1,99 @@
-nav .navbar-brand
+*
 {
-    /* size for brand */
-    font-size: xx-large;
+    margin: 0;
+    padding: 0;
 }
 
-/* colors for brand */
-nav .navbar-brand .blue
+#header
 {
-    color: #f2f2f2;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
 }
-nav .navbar-brand .red
+
+.navbar
 {
-    color: #73b9ef;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    padding: 50px 0;
 }
-nav .navbar-brand .yellow
+
+.navbar-brand
 {
-    color: #f5b82e;
+    font-weight: 600;
+    font-size: 1.5em;
 }
-nav .navbar-brand .green
+
+.navbar-dark .navbar-brand
 {
-    color: #2e944b;
+    color: #dcdde1
 }
 
-.nav-hd{
-    border: 1px solid;
-    border-radius: 5px; 
-    background-color: #d1d1d1;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 3px;
-    color: red;
+.nav-item
+{
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-left: 10px;
 }
 
-.nav-desgn{
-    border: 1px solid grey;
-    border-radius: 2px;
-    margin: 2px;
-    padding: 3px;
+.navbar-dark .nav-item .navbar-nav nav-link:hover
+{
+    background: #dcdde1;
+    color: #262626;
+}
+
+.main
+{
+    position: relative;
+     background: url("https://media.istockphoto.com/photos/texture-dark-concrete-floor-picture-id621925576?k=6&m=621925576&s=612x612&w=0&h=H4rph08J2vSJz_crupTLvHf5OKW0olvoRJzaAK37Yhg=");
+    /* https://i.ytimg.com/vi/oLod_kR1PHQ/maxresdefault.jpg"); */
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 220px 0 220px;
+}
+
+.main h2
+{
+    margin: 0;
+    padding: 0;
+    font-size: 3.1em;
+    color: #dcdde1;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.main p
+{
+    margin-top: 1em;
+    padding: 0;
+    font-size: 1.4em;
+    color: #dcdde1;
+}
+
+label
+{
+    color: #ffffff;
+}
+
+@media(max-width: 768px)
+{
+    .main
+    {
+        padding: 200px 0;
+    }
+
+    .main h2
+    {
+        font-size: 2em;
+    }
 }
 
 
-
-.foot-er{
-    border-top: solid;
-}
 .my-form{
-    border: 1px solid red;
+    border: 1px solid;
     border-radius: 15px 50px;
     padding: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: #ffffff;
 }
 .book-dpt{
     margin-bottom: 30px;
@@ -128,43 +172,10 @@ nav .navbar-brand .green
    display: none; 
 }
 
-main img
-{
-    /* constrain images on small screens */
-    max-width: 100%;
-}
 
-.form-container
-{ 
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px #000;
- }
 
-.bg
-{
-    background-image: url("http://www.cpsafrica.com/wp-content/uploads/2016/02/Hiace-Bus-15-Seats-13-1030x687.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    position: relative;
-    width: 102%;
-    height: 700px;
-}
-
-.bg-overlay
-{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.mg
+/* .mg
 {
     margin-top: 150px;
 
-}
+} */
