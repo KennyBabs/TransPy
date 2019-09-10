@@ -6,12 +6,13 @@
 
 {% block main %}
 
-    <table class="table table-striped container">
+    <table class="table table-striped container text-center">
         <thead>
             <tr>
                 <th>Departure</th>
                 <th>Arrival</th>
                 <th>Seat Number</th>
+                <th>Amount</th>
                 <th>Date</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>Lagos</td>
                 <td>{{detail.terminal}}</td>
                 <td>{{detail.seat}}</td>
+                <td>{{naira(detail.amount)}}</td>
                 <td>{{detail.date}}</td>
             </tr>
             {% endfor %}
